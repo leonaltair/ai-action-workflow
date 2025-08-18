@@ -1,0 +1,10 @@
+name: local
+jobs:
+  greet:
+    steps:
+      - name: say
+        uses: shell
+        with:
+          cmd: echo "Hello, ${{ inputs.name || 'World' }}!"
+
+

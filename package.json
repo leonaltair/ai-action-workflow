@@ -1,0 +1,28 @@
+{
+  "name": "ai-action-workflow",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "YAML-driven workflow runner for LLM agents, inspired by GitHub Actions",
+  "scripts": {
+    "dev": "tsx src/cli.ts examples/simple.yml",
+    "local": "tsx src/cli.ts examples/local.yml",
+    "run": "tsx src/cli.ts",
+    "typecheck": "tsc --noEmit",
+    "demo": "tsx src/cli.ts examples/simple.yml"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "openai": "^4.56.0",
+    "p-limit": "^6.1.0",
+    "cross-spawn": "^7.0.3",
+    "yaml": "^2.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  }
+}
+
+

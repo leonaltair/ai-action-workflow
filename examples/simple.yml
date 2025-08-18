@@ -1,0 +1,23 @@
+name: simple
+env:
+  MODEL: gpt-4o-mini
+jobs:
+  plan:
+    steps:
+      - name: ask
+        uses: agent
+        with:
+          model: ${{ env.MODEL }}
+          prompt: |
+            请列出三步计划来研究 ${{ inputs.topic || '人工智能代理' }}。
+        outputs:
+          plan: ${{ steps.ask.result.content }}
+  echo:
+    needs: [plan]
+    steps:
+      - name: show
+        uses: shell
+        with:
+          cmd: echo "Plan => ${{ jobs.plan.outputs.plan }}"
+
+
