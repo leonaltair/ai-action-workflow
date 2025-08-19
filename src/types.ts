@@ -7,6 +7,7 @@ export type WorkflowFile = {
 
 export type Job = {
   name?: string;
+  if?: string; // expression at job level
   needs?: string[];
   env?: Record<string, string>;
   steps: Step[];
@@ -41,6 +42,7 @@ export type JobRuntimeResult = {
   steps: Record<string, StepRuntimeResult>;
   outputs: Record<string, any>;
   error?: string;
+  skipped?: boolean;
 };
 
 

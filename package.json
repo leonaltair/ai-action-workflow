@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "tsx src/cli.ts examples/simple.yml",
     "local": "tsx src/cli.ts examples/local.yml",
+    "deps": "tsx src/cli.ts examples/deps.yml",
     "run": "tsx src/cli.ts",
     "typecheck": "tsc --noEmit",
     "demo": "tsx src/cli.ts examples/simple.yml"

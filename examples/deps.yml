@@ -1,0 +1,48 @@
+name: deps
+env:
+  PREFIX: "[wf]"
+jobs:
+  prepare:
+    steps:
+      - name: mk_greet
+        uses: shell
+        with:
+          cmd: echo "${{ env.PREFIX }} Hello, ${{ inputs.name || 'World' }}"
+      - name: gen_id
+        uses: shell
+        with:
+          cmd: node -e "console.log(Math.random().toString(36).slice(2,10))"
+    outputs:
+      greeting: ${{ steps.mk_greet.result.stdout }}
+      id: ${{ steps.gen_id.result.stdout }}
+
+  compose:
+    needs: [prepare]
+    steps:
+      - name: combine
+        uses: shell
+        with:
+          cmd: echo "ID=${{ jobs.prepare.outputs.id }}|GREETING=${{ jobs.prepare.outputs.greeting }}"
+    outputs:
+      combined: ${{ steps.combine.result.stdout }}
+
+  verify:
+    if: inputs.run_verify
+    needs: [compose]
+    steps:
+      - name: show_combined
+        uses: shell
+        with:
+          cmd: echo "Combined => ${{ jobs.compose.outputs.combined }}"
+      - name: show_greeting
+        uses: shell
+        with:
+          cmd: echo "Greeting only => ${{ jobs.prepare.outputs.greeting }}"
+      - name: maybe_extra
+        if: inputs.show_extra
+        uses: shell
+        with:
+          cmd: echo "EXTRA => ${{ inputs.show_extra }}"
+
+
+

@@ -30,7 +30,8 @@ async function main() {
   // minimal pretty print of results
   console.log('\n=== Workflow Results ===');
   for (const [jobId, job] of Object.entries(ctx.jobs)) {
-    console.log(`job ${jobId}: ${job.success ? 'success' : 'failed'}`);
+    const state = job.skipped ? 'skipped' : (job.success ? 'success' : 'failed');
+    console.log(`job ${jobId}: ${state}`);
     for (const [stepName, step] of Object.entries(job.steps)) {
       console.log(`  - step ${stepName}: ${step.success ? 'ok' : 'error'}`);
     }
